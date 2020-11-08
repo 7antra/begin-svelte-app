@@ -14,7 +14,9 @@
         method: "POST",
       });
       if (!resp.ok) throw new Error("probleme");
-    } catch (error) {}
+    } catch (error) {
+      console.error(error.msg);
+    }
   }
 </script>
 
