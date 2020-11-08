@@ -1,4 +1,12 @@
+let data = require('@begin/data')
+
 exports.handler = async function http (req) {
+
+  let table = 'pomodoro'
+  let key = "start"
+
+  let last = await data.get({table, key})
+
   console.log('Begin API called')
   return {
     headers: {
@@ -7,7 +15,7 @@ exports.handler = async function http (req) {
     },
     statusCode: 200,
     body: JSON.stringify({
-      msg: 'Hello from Svelte + your Begin API!'
+      msg: 'Hello from Svelte + your Begin API!' + last
     })
   }
 }
