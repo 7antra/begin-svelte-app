@@ -13,6 +13,7 @@
       let resp = await fetch("/api", {
         method: "POST",
       });
+      if (!resp.ok) throw new Error("probleme");
     } catch (error) {}
   }
 </script>
