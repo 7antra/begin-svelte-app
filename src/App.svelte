@@ -1,20 +1,21 @@
 <script>
-  import { onMount } from 'svelte'
-  export let name
-  export let message
-  onMount(async () => {
-    let data = await (await fetch('/api')).json()
-    message = data.msg
-    console.log('MESSAGE: ', message)
-  })
-</script>
+  import { onMount } from "svelte";
+  export let name;
+  export let timer;
 
-<main>
-  <h1>Hello {name}!</h1>
-  <h2>{message}</h2>
-  <h3>Change me!</h3>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+  onMount(async () => {
+    let data = await (await fetch("/api")).json();
+    timer = data;
+  });
+
+  async function startPomo() {
+    try {
+      let resp = await fetch("/api", {
+        method: "POST",
+      });
+    } catch (error) {}
+  }
+</script>
 
 <style>
   main {
@@ -37,3 +38,14 @@
     }
   }
 </style>
+
+<main>
+  <h1>Hello {name}!</h1>
+  <h2>{timer}</h2>
+  <button on:click={startPomo}>Start</button>
+  <p>
+    Visit the
+    <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
+    to learn how to build Svelte apps.
+  </p>
+</main>

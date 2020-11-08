@@ -3,10 +3,12 @@ let data = require("@begin/data");
 exports.handler = async function http(req) {
   let table = "pomodoro";
   let key = "start";
+  let datenow = Date.now();
 
-  let last = await data.get({ table, key });
+  await data.set({ table, key, datenow });
 
-  console.log("Begin API called", last.datenow);
+  console.log(datenow);
+
   return {
     headers: {
       "content-type": "application/json; charset=utf8",
@@ -14,6 +16,8 @@ exports.handler = async function http(req) {
         "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
     },
     statusCode: 200,
-    body: JSON.stringify(last.datenow),
+    body: JSON.stringify({
+      datenow,
+    }),
   };
 };
